@@ -12,7 +12,7 @@ class WorkoutType(Enum):
     RACE_OR_TEST = 7
 
 
-class Intensity(Enum):
+class WorkoutIntensity(Enum):
     RECOVERY = 1,
     LITE = 2,
     AEROBIC = 3,
@@ -39,8 +39,19 @@ class Workout:
                                                                                              self.duration,
                                                                                              self.length)
 
+
+class QualityWorkout(Workout):
+    def __init__(self, raw_details, day_in_week, workout_type):
+        self.raw_details = raw_details.split(',')
+        self.details = dict()
+        self.parse_details()
+        super().__init__(self.details['name'], workout_type, WorkoutIntensity.TENSED, day_in_week, self.duration, self.length)
+
     """
     Abstract method to retrieve parameter
     """
     def parse_details(self):
+        raise NotImplementedError('Method should have been implemented by child class')
+
+    def __str__(self):
         raise NotImplementedError('Method should have been implemented by child class')

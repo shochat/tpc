@@ -1,12 +1,9 @@
-from model.workout import Workout, WorkoutType, Intensity
+from model.Workouts.workout import QualityWorkout
 
 
-class PyramidWorkout(Workout):
-    def __init__(self, day_in_week, details):
-        self.raw_details = details
-        self.details = dict()
-        self.parse_details()
-        super().__init__(self.details['name'], WorkoutType.PYRAMID, Intensity.UN_AEROBIC, day_in_week, self.duration, self.length)
+class PyramidWorkout(QualityWorkout):
+    def __init__(self, raw_details,day_in_week):
+        super().__init__(raw_details=raw_details, day_in_week=day_in_week)
 
     def parse_details(self):
         self.details['name'] = self.raw_details[0]
