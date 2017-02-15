@@ -1,3 +1,4 @@
+import json
 from enum import Enum, unique
 
 
@@ -24,8 +25,8 @@ class WorkoutIntensity(Enum):
 
 
 class Workout:
-    def __init__(self, name, workout_type, intensity, day_in_week, duration, length):
-        self.name = name
+    def __init__(self, description, workout_type, intensity, day_in_week, duration, length):
+        self.description = description
         self.workout_type = workout_type
         self.intensity = intensity
         self.day_in_week = day_in_week
@@ -33,12 +34,22 @@ class Workout:
         self.length = length
 
     def __str__(self):
-        return 'Name: {}\nIntensity: {}\nType: {}\nDay: {}\nDuration: {}\nLength: {}'.format(self.name,
-                                                                                             self.intensity,
-                                                                                             self.workout_type,
-                                                                                             self.day_in_week,
-                                                                                             self.duration,
-                                                                                             self.length)
+        return 'Type: {}\nDescription: {}\nIntensity: {}\nDay: {}\nLength: {}\nDuration: {}'.format(self.workout_type,
+                                                                                                    self.description,
+                                                                                                    self.intensity,
+                                                                                                    self.day_in_week,
+                                                                                                    self.length,
+                                                                                                    self.duration)
+
+    def __repr__(self):
+        return json.dumps({
+            'description': self.description,
+            'type': self.workout_type.name,
+            'intensity': self.intensity.name,
+            'weekday': self.day_in_week.value,
+            'length': self.length,
+            'duration': self.duration
+        })
 
 
 class QualityWorkout(Workout):
@@ -52,8 +63,6 @@ class QualityWorkout(Workout):
     Abstract method to retrieve parameter
     First segment must be the workout's name
     """
-    def parse_details(self):
-        raise NotImplementedError('Method should have been implemented by child class')
 
-    def __str__(self):
+    def parse_details(self):
         raise NotImplementedError('Method should have been implemented by child class')

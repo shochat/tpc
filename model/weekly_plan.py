@@ -41,7 +41,7 @@ class WeeklyPlan:
 
     def add_volume_workout(self, volume_workout_detail):
         if not self.is_with_b_level_race:
-            self.add_workout(Workout(name='Volume', workout_type=WorkoutType.VOLUME, intensity=WorkoutIntensity.AEROBIC,
+            self.add_workout(Workout(description='Run in steady pace', workout_type=WorkoutType.VOLUME, intensity=WorkoutIntensity.AEROBIC,
                                      day_in_week=RecommendedWorkoutDay.VOLUME, duration=1,
                                      length=volume_workout_detail[self.weeks_from_race]))
 
@@ -76,11 +76,12 @@ class WeeklyPlan:
 
     def add_tempo_workout(self, volume_workout_detail):
         distance = max(volume_workout_detail[self.weeks_from_race] - 16, 8)
-        self.add_workout(Workout(name='Tempo', workout_type=WorkoutType.TEMPO, intensity=WorkoutIntensity.TENSED,
+        description = 'Worm up for 10 minutes\nRun {} KM in race target pace\nCool down for 10 minutes'
+        self.add_workout(Workout(description=description, workout_type=WorkoutType.TEMPO, intensity=WorkoutIntensity.TENSED,
                                  day_in_week=RecommendedWorkoutDay.TEMPO, duration=1, length=distance))
 
     def add_lite_volume_workout(self):
-        self.add_workout(Workout(name='Lite Volume', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
+        self.add_workout(Workout(description='Run in steady pace for recovery', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
                                  day_in_week=RecommendedWorkoutDay.FIRST_LITE_VOLUME, duration=1, length=10))
 
     def add_second_quality_workout(self, quality_workout_detail):
@@ -97,5 +98,5 @@ class WeeklyPlan:
             self.add_workout(FartlekWorkout(raw_details=random.choice(optional_workouts), day_in_week=day_in_week))
 
     def add_second_lite_volume_workout(self):
-        self.add_workout(Workout(name='Lite Volume', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
+        self.add_workout(Workout(description='Run in steady pace for recovery', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
                                  day_in_week=RecommendedWorkoutDay.SECOND_LITE_VOLUME, duration=1, length=10))

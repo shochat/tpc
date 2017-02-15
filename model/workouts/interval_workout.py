@@ -4,6 +4,23 @@ from model.workouts.workout import WorkoutType, QualityWorkout
 class IntervalWorkout(QualityWorkout):
     def __init__(self, raw_details, day_in_week):
         super().__init__(raw_details=raw_details, day_in_week=day_in_week, workout_type=WorkoutType.INTERVALS)
+        if 'Interval distance' in self.details:
+            main_drill = '{} Km'.format(self.details['Interval distance'])
+        else:
+            main_drill = '{} Minutes'.format(self.details['Interval time'])
+        if 'Recovery distance' in self.details:
+            main_recovery = '{} Km'.format(self.details['Recovery distance'])
+        else:
+            main_recovery = '{} Minutes'.format(self.details['Recovery time'])
+
+        self.description = '{} Intervals\nWorm up for {} KM\nRepeat for {} times:\n\tRun {} in pace {}' \
+                           '\n\tRecovery run for {} in pace {}\nCool down for {} KM'.format(self.details['name'],
+                                                                                            self.details['Worm up distance'],
+                                                                                            self.details['Repeat count'],
+                                                                                            main_drill, self.details['Interval pace'],
+                                                                                            main_recovery,
+                                                                                            self.details['Recovery pace'],
+                                                                                            self.details['Cool down distance'])
 
     def parse_details(self):
         self.details['name'] = self.raw_details[0]
@@ -39,19 +56,10 @@ class IntervalWorkout(QualityWorkout):
         self.length = int(self.details['Worm up distance']) + int(self.details['Cool down distance']) + total_interval + total_recovery
         self.duration = self.length * ((float(self.details['Interval pace']) + float(self.details['Recovery pace'])) / 2)
 
-    def __str__(self):
-        if 'Interval distance' in self.details:
-            main_drill = '{} Km'.format(self.details['Interval distance'])
-        else:
-            main_drill = '{} Minutes'.format(self.details['Interval time'])
-        if 'Recovery distance' in self.details:
-            main_recovery = '{} Km'.format(self.details['Recovery distance'])
-        else:
-            main_recovery = '{} Minutes'.format(self.details['Recovery time'])
-        return '*** {} ***\nWorm up for {} KM\nRepeat for {} times:\n\tRun {} in pace {}' \
-               '\n\tRecovery run for {} in pace {}\nCool down for {} KM'.format(self.details['name'],
-                                                                                self.details['Worm up distance'],
-                                                                                self.details['Repeat count'],
-                                                                                main_drill, self.details['Interval pace'],
-                                                                                main_recovery, self.details['Recovery pace'],
-                                                                                self.details['Cool down distance'])
+    # def __str__(self):
+    #     return 'Type: {}\nDescription: {}\nIntensity: {}\nDay: {}\nLength: {}\nDuration: {}'.format(self.workout_type,
+    #                                                                                                 self.description,
+    #                                                                                                 self.intensity,
+    #                                                                                                 self.day_in_week,
+    #                                                                                                 self.length,
+    #                                                                                                 self.duration)

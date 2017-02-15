@@ -4,6 +4,21 @@ from model.workouts.workout import QualityWorkout, WorkoutType
 class FartlekWorkout(QualityWorkout):
     def __init__(self, raw_details, day_in_week):
         super().__init__(raw_details=raw_details, day_in_week=day_in_week, workout_type=WorkoutType.FARTLEK)
+        if 'Main drill distances' in self.details:
+            main_drill = '{} KM'.format(self.details['Main drill distances'])
+        else:
+            main_drill = '{} Minutes'.format(self.details['Main drill times'])
+
+        self.description = '{} Fartlek' \
+                           '\nWorm up for {} KM' \
+                           '\nRepeat for {} times:' \
+                           '\n\tRun {} in pace {} (NO RECOVERY BETWEEN SETS)' \
+                           '\nCool down for {} KM'.format(self.details['name'],
+                                                          self.details['Worm up distance'],
+                                                          self.details['Repeat count'],
+                                                          main_drill,
+                                                          self.details['Main drill paces'],
+                                                          self.details['Cool down distance'])
 
     def parse_details(self):
         self.details['name'] = self.raw_details[0]
@@ -29,21 +44,3 @@ class FartlekWorkout(QualityWorkout):
         self.length = self.details['Worm up distance'] + self.details['Cool down distance'] + total_workout
 
         self.duration = self.length * (sum(self.details['Main drill paces']) / len(self.details['Main drill paces']))
-
-    def __str__(self):
-        if 'Main drill distances' in self.details:
-            main_drill = '{} KM'.format(self.details['Main drill distances'])
-        else:
-            main_drill = '{} Minutes'.format(self.details['Main drill times'])
-
-        return '*** {} ***' \
-               '\nWorm up for {} KM' \
-               '\nRepeat for {} times:' \
-               '\n\tRun {} in pace {} (NO RECOVERY BETWEEN SETS)' \
-               '\nCool down for {} KM'.format(self.details['name'],
-                                              self.details['Worm up distance'],
-                                              self.details['Repeat count'],
-                                              main_drill,
-                                              self.details['Main drill paces'],
-                                              self.details['Cool down distance']
-                                              )

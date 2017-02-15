@@ -4,7 +4,7 @@ from enum import Enum, unique
 import yaml
 
 from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
-from model.weekly_plan import WeeklyPlan, WeeklyIntensity
+from model.weekly_plan import WeeklyPlan, WeeklyIntensity, RecommendedWorkoutDay
 
 
 @unique
@@ -97,48 +97,50 @@ class Plan:
             week.intensity_level = WeeklyIntensity.BASE
 
     def add_marathon_b_races(self):
+        day_in_week = RecommendedWorkoutDay.VOLUME
         last_b_race_weekly_plan = self.weekly_plan_list[5]
-        last_b_race_weekly_plan.add_workout(Workout(name='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
-                                                    intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=5, duration=None,
+        last_b_race_weekly_plan.add_workout(Workout(description='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
+                                                    intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=day_in_week, duration=2,
                                                     length=21))
         last_b_race_weekly_plan.is_with_b_level_race = True
         last_b_race_weekly_plan.is_recovery_week = False
 
         before_pressure_raise_b_race_weekly_plan = self.weekly_plan_list[11]
         before_pressure_raise_b_race_weekly_plan.add_workout(Workout(
-            name='Before tense B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
-            day_in_week=5, duration=None, length=21))
+            description='Before tense B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
+            day_in_week=day_in_week, duration=2, length=21))
         before_pressure_raise_b_race_weekly_plan.is_with_b_level_race = True
         before_pressure_raise_b_race_weekly_plan.is_recovery_week = False
 
         if self.full_weeks_till_race > 17:
             baseline_b_race_weekly_plan = self.weekly_plan_list[17]
             baseline_b_race_weekly_plan.add_workout(Workout(
-                name='Baseline B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
-                day_in_week=5, duration=None, length=21))
+                description='Baseline B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
+                day_in_week=day_in_week, duration=2, length=21))
             baseline_b_race_weekly_plan.is_with_b_level_race = True
             baseline_b_race_weekly_plan.is_recovery_week = False
 
     def add_half_marathon_b_races(self):
+        day_in_week = RecommendedWorkoutDay.VOLUME
         last_b_race_weekly_plan = self.weekly_plan_list[5]
-        last_b_race_weekly_plan.add_workout(Workout(name='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
-                                                    intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=5, duration=None,
+        last_b_race_weekly_plan.add_workout(Workout(description='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
+                                                    intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=day_in_week, duration=2,
                                                     length=15))
         last_b_race_weekly_plan.is_with_b_level_race = True
         last_b_race_weekly_plan.is_recovery_week = False
 
         before_pressure_raise_b_race_weekly_plan = self.weekly_plan_list[11]
         before_pressure_raise_b_race_weekly_plan.add_workout(Workout(
-            name='Before tense B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
-            day_in_week=5, duration=None, length=15))
+            description='Before tense B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
+            day_in_week=day_in_week, duration=2, length=15))
         before_pressure_raise_b_race_weekly_plan.is_with_b_level_race = True
         before_pressure_raise_b_race_weekly_plan.is_recovery_week = False
 
         if self.full_weeks_till_race > 17:
             baseline_b_race_weekly_plan = self.weekly_plan_list[17]
             baseline_b_race_weekly_plan.add_workout(Workout(
-                name='Baseline B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
-                day_in_week=5, duration=None, length=10))
+                description='Baseline B level race', workout_type=WorkoutType.RACE_OR_TEST, intensity=WorkoutIntensity.VERY_INTENSE,
+                day_in_week=day_in_week, duration=2, length=10))
             baseline_b_race_weekly_plan.is_with_b_level_race = True
             baseline_b_race_weekly_plan.is_recovery_week = False
 
