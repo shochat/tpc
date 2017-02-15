@@ -1,6 +1,5 @@
 import random
 from enum import Enum, unique
-
 from model.workouts.fartlek_workout import FartlekWorkout
 from model.workouts.interval_workout import IntervalWorkout
 from model.workouts.pyramid_workout import PyramidWorkout
@@ -14,6 +13,7 @@ class WeeklyIntensity(Enum):
     BUILD = 2,
     STRESS = 3,
     TAPPER = 4
+
 
 @unique
 class RecommendedWorkoutDay(Enum):
