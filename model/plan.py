@@ -3,7 +3,7 @@ from enum import Enum, unique
 
 import yaml
 
-from model.Workouts.workout import Workout, WorkoutType, WorkoutIntensity
+from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
 from model.weekly_plan import WeeklyPlan, WeeklyIntensity
 
 
@@ -28,15 +28,28 @@ class Plan:
         for week_number in range(0, self.full_weeks_till_race, 1):
             self.weekly_plan_list.append(WeeklyPlan(week_number))
         self.quality_workout_detail = yaml.load(open('resources/quality-main.yaml', 'r'))
+        self.volume_run_detail = yaml.load(open('resources/weekly-volume-workout-distances.yaml', 'r'))
 
     def create(self):
         self.insert_b_level_races_or_tests()
         self.set_recovery_week()
         self.set_weekly_workout_intensity()
-        self.insert_volume_workouts()
-        self.insert_first_quality_workouts()
-        self.insert_second_quality_workouts()
-        self.insert_lite_volume_workouts()
+        for wp in self.weekly_plan_list:
+            if self.race_distance is RaceDistance.MARATHON:
+                wp.add_volume_workout(self.volume_run_detail['marathon'])
+                wp.add_first_quality_workout(self.quality_workout_detail['marathon'])
+            elif self.race_distance is RaceDistance.HALF_MARATHON:
+                wp.add_volume_workout(self.volume_run_detail['half-marathon'])
+                wp.add_first_quality_workout(self.quality_workout_detail['half-marathon'])
+            wp.add_lite_volume_workout()
+
+            if self.weekly_training_days > 4:
+                if self.race_distance is RaceDistance.MARATHON:
+                    wp.add_second_quality_workout(self.quality_workout_detail['marathon'])
+                elif self.race_distance is RaceDistance.HALF_MARATHON:
+                    wp.add_second_quality_workout(self.quality_workout_detail['half-marathon'])
+            if self.weekly_training_days > 5:
+                wp.add_second_lite_volume_workout()
 
     def calculate_full_weeks_till_race(self):
         today = datetime.date.today()
@@ -82,26 +95,6 @@ class Plan:
         base_weeks = list(filter((lambda x: x.weeks_from_race >= 17), self.weekly_plan_list))
         for week in base_weeks:
             week.intensity_level = WeeklyIntensity.BASE
-
-    def insert_volume_workouts(self):
-        with open('resources/weekly-volume-workout-distances.yaml', 'r') as stream:
-            distances = yaml.load(stream)[self.race_distance.name.lower()]
-            for i in range(1, self.full_weeks_till_race):
-                if self.weekly_plan_list[i].is_with_b_level_race is True:
-                    continue
-                volume_workout = Workout(name='Volume', workout_type=WorkoutType.VOLUME, intensity=WorkoutIntensity.AEROBIC,
-                                         day_in_week=5, duration=1, length=distances[i])
-                self.weekly_plan_list[i].add_workout(volume_workout)
-
-    def insert_first_quality_workouts(self):
-        for wp in self.weekly_plan_list:
-            wp.add_first_quality_workout(self.quality_workout_detail)
-
-    def insert_second_quality_workouts(self):
-        pass
-
-    def insert_lite_volume_workouts(self):
-        pass
 
     def add_marathon_b_races(self):
         last_b_race_weekly_plan = self.weekly_plan_list[5]
