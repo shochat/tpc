@@ -34,12 +34,8 @@ class Workout:
         self.length = length
 
     def __str__(self):
-        return 'Type: {}\nDescription: {}\nIntensity: {}\nDay: {}\nLength: {}\nDuration: {}'.format(self.workout_type,
-                                                                                                    self.description,
-                                                                                                    self.intensity,
-                                                                                                    self.day_in_week,
-                                                                                                    self.length,
-                                                                                                    self.duration)
+        return 'Type: {}\nDescription: {}\nIntensity: {}\nDay: {}\nLength: {}\nDuration: {}'\
+            .format(self.workout_type, self.description, self.intensity, self.day_in_week, self.length, self.duration)
 
     def __repr__(self):
         return json.dumps({
@@ -63,6 +59,5 @@ class QualityWorkout(Workout):
     Abstract method to retrieve parameter
     First segment must be the workout's name
     """
-
     def parse_details(self):
         raise NotImplementedError('Method should have been implemented by child class')
