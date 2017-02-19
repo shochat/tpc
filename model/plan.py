@@ -1,8 +1,6 @@
 import datetime
-from enum import Enum, unique
-
 import yaml
-
+from enum import Enum, unique
 from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
 from model.weekly_plan import WeeklyPlan, WeeklyIntensity, RecommendedWorkoutDay
 
@@ -15,13 +13,13 @@ class RaceDistance(Enum):
 
 
 class Plan:
-    def __init__(self, race_date, race_distance, time_target, shape_level, weekly_training_days):
-        self.race_date = race_date
+    def __init__(self, user_detail):
+        self.race_date = user_detail.race_date
         self.race_day = self.race_date.weekday
-        self.race_distance = race_distance
-        self.time_target = time_target
-        self.shape_level = shape_level
-        self.weekly_training_days = weekly_training_days
+        self.race_distance = user_detail.race_distance
+        self.target_time = user_detail.target_time
+        self.shape_level = user_detail.shape_level
+        self.weekly_training_days = user_detail.weekly_training_days
         self.full_weeks_till_race = self.calculate_full_weeks_till_race()
         self.weekly_plan_list = list()
         self.validate_goal_is_reachable()
