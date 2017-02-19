@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training plan</title>
+</head>
+<body>
+    {% for wp in results %}
+    <p>
+    <h3><u>Workout plan for week {{ wp.weeks_from_race }} before race</u></h3>
+    <h4><b>Weekly total {{ wp.weekly_total }}</b></h4>
+    <table border="1">
+        {% for workout in wp.workouts %}
+            <tr>
+                <td>{{ workout.workout_type }}</td>
+                <td>{{ workout.description }}</td>
+                <td>{{ workout.intensity }}</td>
+                <td>{{ workout.day_in_week }}</td>
+                <td>{{ workout.length }}</td>
+                <td>{{ workout.duration }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </p>
+    {% endfor %}
+</body>
+</html>
