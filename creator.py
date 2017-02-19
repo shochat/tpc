@@ -1,24 +1,20 @@
-import datetime
-from model.plan import Plan, RaceDistance
+from flask import Flask
 
+from controllers import controllers
 
-def main():
-    race_date = datetime.date(2017, 6, 11)
-    p = Plan(race_date=race_date, race_distance=RaceDistance.MARATHON, time_target=3, shape_level=7, weekly_training_days=6)
-    p.create()
-    for wp in p.weekly_plan_list:
-        print('--- Weekly plan for week {} ---'.format(wp.weeks_from_race))
-        print('---  Weekly   total  {}  KM ---'.format(wp.weekly_total))
-        for workout in wp.workouts:
-            print(workout)
+app = Flask(__name__)
+app.register_blueprint(controllers)
+
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True)
 
+    # TODO: Insert former races as list
     # TODO: Check if inserted details enable plan creation according to goal
     # TODO: Set pace in quality workouts according to target pace
     # TODO: improve equation of calculate workout duration
     # TODO: Add description field to workout
+    # TODO: Fix mechanism of inserting b level races (day of race and length)
     # TODO: Set IntensityLevel for half marathon
     # TODO: Set quality workouts for half marathon
     # TODO: Week start day other than Sunday
