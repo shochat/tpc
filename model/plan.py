@@ -7,9 +7,9 @@ from model.weekly_plan import WeeklyPlan, WeeklyIntensity, RecommendedWorkoutDay
 
 @unique
 class RaceDistance(Enum):
-    MARATHON = 1,
-    HALF_MARATHON = 2,
-    KM_10 = 3
+    MARATHON = 42.2,
+    HALF_MARATHON = 21.1,
+    KM_10 = 10
 
 
 class Plan:
