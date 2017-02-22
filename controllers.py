@@ -1,9 +1,7 @@
-import datetime
 from flask import Blueprint
 from flask import render_template
 from flask import request
-
-from model.plan import Plan, RaceDistance
+from model.plan import Plan
 from model.user_details import UserDetails
 
 controllers = Blueprint('controllers', __name__, template_folder='templates')
