@@ -5,11 +5,13 @@ from controllers import controllers
 app = Flask(__name__)
 app.register_blueprint(controllers)
 
-
 if __name__ == '__main__':
     app.run(debug=True)
 
     # TODO: Insert former races as list
+    # TODO: Error handling:
+    # More than 24 weeks
+    # Not all data provided
     # TODO: Check if inserted details enable plan creation according to goal
     # TODO: Set pace in quality workouts according to target pace
     # TODO: improve equation of calculate workout duration
