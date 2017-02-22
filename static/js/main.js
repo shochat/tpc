@@ -1,13 +1,15 @@
 $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-    /*,onSet: function (ele) {
-        if(ele.select){
-            this.close();
-        }
+    min: true,
+    max: 168,
+    closeOnSelect: true,
+    closeOnClear: true
     }*/
+
 });
 $(document).ready(function() {
     $('select').material_select();
   });
 
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
