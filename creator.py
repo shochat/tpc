@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.register_blueprint(controllers)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
 
     # TODO: Insert former races as list
     # TODO: Error handling:
