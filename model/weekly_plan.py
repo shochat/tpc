@@ -17,13 +17,13 @@ class WeeklyIntensity(Enum):
 
 @unique
 class RecommendedWorkoutDay(Enum):
-    FIRST_QUALITY = 0,
-    SECOND_LITE_VOLUME = 1,
-    TEMPO = 2,
-    SECOND_QUALITY = 3,
-    FIRST_LITE_VOLUME = 4,
-    VOLUME = 5,
-    REST = 6
+    MONDAY = 0,
+    TUESDAY = 1,
+    WEDNESDAY = 2,
+    THURSDAY = 3,
+    FRIDAY = 4,
+    SATURDAY = 5,
+    SUNDAY = 6
 
 
 class WeeklyPlan:
@@ -42,11 +42,11 @@ class WeeklyPlan:
     def add_volume_workout(self, volume_workout_detail):
         if not self.is_with_b_level_race:
             self.add_workout(Workout(description='Run in steady pace', workout_type=WorkoutType.VOLUME, intensity=WorkoutIntensity.AEROBIC,
-                                     day_in_week=RecommendedWorkoutDay.VOLUME, duration=1,
+                                     day_in_week=RecommendedWorkoutDay.SATURDAY, duration=1,
                                      length=volume_workout_detail[self.weeks_from_race]))
 
     def add_first_quality_workout(self, quality_workout_detail):
-        day_in_week = RecommendedWorkoutDay.FIRST_QUALITY
+        day_in_week = RecommendedWorkoutDay.MONDAY
         quality_type = random.choice(['intervals', 'pyramid', 'uphill', 'fartlek'])
         if self.is_recovery_week:
             workout_intensity_in_list = 'low'
@@ -78,14 +78,14 @@ class WeeklyPlan:
         distance = max(volume_workout_detail[self.weeks_from_race] - 16, 8)
         description = 'Worm up for 10 minutes\nRun {} KM in race target pace\nCool down for 10 minutes'
         self.add_workout(Workout(description=description, workout_type=WorkoutType.TEMPO, intensity=WorkoutIntensity.TENSED,
-                                 day_in_week=RecommendedWorkoutDay.TEMPO, duration=1, length=distance))
+                                 day_in_week=RecommendedWorkoutDay.WEDNESDAY, duration=1, length=distance))
 
     def add_lite_volume_workout(self):
         self.add_workout(Workout(description='Run in steady pace for recovery', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
-                                 day_in_week=RecommendedWorkoutDay.FIRST_LITE_VOLUME, duration=1, length=10))
+                                 day_in_week=RecommendedWorkoutDay.FRIDAY, duration=1, length=10))
 
     def add_second_quality_workout(self, quality_workout_detail):
-        day_in_week = RecommendedWorkoutDay.SECOND_QUALITY
+        day_in_week = RecommendedWorkoutDay.THURSDAY
         quality_type = random.choice(['intervals', 'pyramid', 'uphill', 'fartlek'])
         optional_workouts = quality_workout_detail[quality_type]['low']
         if quality_type is 'intervals':
@@ -99,4 +99,11 @@ class WeeklyPlan:
 
     def add_second_lite_volume_workout(self):
         self.add_workout(Workout(description='Run in steady pace for recovery', workout_type=WorkoutType.LITE_VOLUME, intensity=WorkoutIntensity.LITE,
-                                 day_in_week=RecommendedWorkoutDay.SECOND_LITE_VOLUME, duration=1, length=10))
+                                 day_in_week=RecommendedWorkoutDay.TUESDAY, duration=1, length=10))
+
+    def serialize(self):
+        return {
+            'weekly_total': self.weekly_total,
+            'workouts': list(map(lambda w: w.serialize(), self.workouts))
+        }
+

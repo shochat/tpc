@@ -1,4 +1,6 @@
 import datetime
+import json
+
 import yaml
 from enum import Enum, unique
 from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
@@ -95,7 +97,7 @@ class Plan:
             week.intensity_level = WeeklyIntensity.BASE
 
     def add_marathon_b_races(self):
-        day_in_week = RecommendedWorkoutDay.VOLUME
+        day_in_week = RecommendedWorkoutDay.SATURDAY
         last_b_race_weekly_plan = self.weekly_plan_list[5]
         last_b_race_weekly_plan.add_workout(Workout(description='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
                                                     intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=day_in_week, duration=2,
@@ -119,7 +121,7 @@ class Plan:
             baseline_b_race_weekly_plan.is_recovery_week = False
 
     def add_half_marathon_b_races(self):
-        day_in_week = RecommendedWorkoutDay.VOLUME
+        day_in_week = RecommendedWorkoutDay.SATURDAY
         last_b_race_weekly_plan = self.weekly_plan_list[5]
         last_b_race_weekly_plan.add_workout(Workout(description='Last B level race', workout_type=WorkoutType.RACE_OR_TEST,
                                                     intensity=WorkoutIntensity.VERY_INTENSE, day_in_week=day_in_week, duration=2,
@@ -142,3 +144,10 @@ class Plan:
             baseline_b_race_weekly_plan.is_with_b_level_race = True
             baseline_b_race_weekly_plan.is_recovery_week = False
 
+    def serialize(self):
+        return {
+            'race_date': str(self.race_date),
+            'race_distance': str(self.race_distance.name),
+            'target_time': str(self.target_time),
+            'weekly_plan_list': list(map(lambda wp: wp.serialize(), self.weekly_plan_list))
+        }

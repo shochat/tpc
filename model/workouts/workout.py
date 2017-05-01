@@ -42,10 +42,20 @@ class Workout:
             'description': self.description,
             'type': self.workout_type.name,
             'intensity': self.intensity.name,
-            'weekday': self.day_in_week.value,
+            'weekday': self.day_in_week.name,
             'length': self.length,
             'duration': self.duration
         })
+
+    def serialize(self):
+        return {
+            'description': self.description,
+            'type': self.workout_type.name,
+            'intensity': self.intensity.name,
+            'weekday': self.day_in_week.name,
+            'length': self.length,
+            'duration': self.duration
+        }
 
 
 class QualityWorkout(Workout):
