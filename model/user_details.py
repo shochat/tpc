@@ -1,5 +1,4 @@
 import datetime
-
 from model.plan import RaceDistance
 
 
