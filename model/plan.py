@@ -1,10 +1,8 @@
 import datetime
-import json
-
-import yaml
 from enum import Enum, unique
-from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
+import yaml
 from model.weekly_plan import WeeklyPlan, WeeklyIntensity, RecommendedWorkoutDay
+from model.workouts.workout import Workout, WorkoutType, WorkoutIntensity
 
 
 @unique
