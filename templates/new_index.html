@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>TPC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type="text/css"/>
+    <link href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css" rel="stylesheet" type="text/css"/>
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="static/css/main.css"/>
+    <link rel="icon" href="static/img/stitch.jpeg"/>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">TPC</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="index.html">Create race</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<main>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card">
+                <div class="card-content">
+                    <form> <!-- action="create-plan" method="post">-->
+                        <div id="race-details" class="race-details">
+                            <div class="row">
+                                <h3>Race details</h3>
+                                <div class="input-field col s8">
+                                    <input type="date" id="race_date" name="race_date" class="datepicker">
+                                    <label for="race_date">Race date</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8">
+                                    <select  id="race_distance" name="race_distance" class="validate">
+                                        <option value="" disabled selected>race distance</option>
+                                        <option value="marathon">Marathon (42.2 KM)</option>
+                                        <option value="half_marathon">Half Marathon (21.1 KM)</option>
+                                        <option value="km_10">10 KM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8">
+                                    <input id="target_time" name="target_time" class="timepicker" type="time">
+                                    <label for="target_time">Target time</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light" onclick="toggle()">
+                            <i class="material-icons">skip_next</i>
+                            </button>
+                        </div>
+
+                        <div id="user-details" class="user-details">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="race_result_distance" name="race_result_distance" type="text" class="validate">
+                                    <label for="race_result_distance">Former result distance</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="race_result_time" name="race_result_time" type="text" class="validate">
+                                    <label for="race_result_time">Former result time</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <input id="age" name="age" type="text" class="validate">
+                                    <label for="age">Age</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <input id="weight" name="weight" type="text" class="validate">
+                                    <label for="age">Weight</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <select id="shape_level" name="shape_level" class="validate">
+                                        <option value="" disabled selected>Shape level</option>
+                                        <option value="1">Bad shape</option>
+                                        <option value="2">Beginner</option>
+                                        <option value="3">Good shape</option>
+                                        <option value="4">Advanced runner</option>
+                                        <option value="5">Experienced runner</option>
+                                        <option value="6">Veteran runner</option>
+                                        <option value="7">Lifetime athlete</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s3">
+                                    <select id="weekly_training_days" name="weekly_training_days" class="validate">
+                                        <option disabled selected>Weekly days</option>
+                                        <option value="5">5</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="row">-->
+                            <!--<div class="card-action">-->
+                                <!--<button class="btn waves-effect waves-light" type="submit" name="action">Submit-->
+                                    <!--<i class="material-icons right">thumb_up</i>-->
+                                <!--</button>-->
+                                <!--<button class="btn waves-effect waves-light" type="button" name="action">cancel-->
+                                    <!--<i class="material-icons right">thumb_down</i>-->
+                                <!--</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
+<script type="text/javascript" src="static/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
+<script src="static/js/main.js"></script>
+</body>
+</html>
