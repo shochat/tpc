@@ -11,13 +11,11 @@ controllers = Blueprint('controllers', __name__, template_folder='templates')
 def form():
     return render_template('index.html')
 
+
 @controllers.route('/index.html')
 def form_from_index():
     return render_template('index.html')
 
-@controllers.route('/new-form')
-def new_form():
-    return render_template('new_index.html')
 
 @controllers.route('/test-application')
 def test_application():
