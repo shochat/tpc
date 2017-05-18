@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-<head>
-    <title>TPC</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type="text/css"/>
-    <link href="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/css/materialize.clockpicker.css" rel="stylesheet" type="text/css"/>
-    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection"/>
-    <link rel="stylesheet" href="static/css/main.css"/>
-    <link rel="icon" href="static/img/stitch.jpeg"/>
-</head>
-<body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">TPC</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="index.html">Create race</a></li>
-            </ul>
-        </div>
-    </nav>
-
+{% extends 'base.html' %}
+{% block title %} Race & user details {% endblock %}
+{% block content %}
 <main>
     <div class="row">
         <div class="col s6 offset-s3">
@@ -127,11 +108,4 @@
         </div>
     </div>
 </main>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
-<script type="text/javascript" src="static/js/materialize.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/chingyawhao/materialize-clockpicker/master/dist/js/materialize.clockpicker.js"></script>
-<script src="static/js/main.js"></script>
-</body>
-</html>
+{% endblock%}
