@@ -13,3 +13,7 @@ main {
     margin-top: 10%;
 
 }
+#submitBtn {
+    position: absolute;
+    right: 0px;
+}
