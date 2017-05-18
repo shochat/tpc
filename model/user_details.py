@@ -22,3 +22,17 @@ class UserDetails:
     def calculate_target_pace(self):
         total_time_in_minutes = self.target_time.hour * 60 + self.target_time.minute
         return total_time_in_minutes / float(self.race_distance.value[0])
+
+
+class UserDetailsMock(object):
+    def __init__(self):
+        self.race_date = (datetime.datetime.now() + datetime.timedelta(weeks=15)).date()
+        self.race_distance = RaceDistance.MARATHON
+        self.target_time = datetime.datetime.strptime('03:30', '%H:%M').time()
+        self.target_pace = 5
+        # TODO former races
+        self.age = 43
+        self.weight = 75
+        self.shape_level = 4
+        self.weekly_training_days = 6
+
