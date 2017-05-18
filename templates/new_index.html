@@ -25,8 +25,8 @@
         <div class="col s6 offset-s3">
             <div class="card">
                 <div class="card-content">
-                    <form> <!-- action="create-plan" method="post">-->
-                        <div id="race-details" class="race-details">
+                    <form action="create-plan" method="post">
+                        <div id="race-details">
                             <div class="row">
                                 <h3>Race details</h3>
                                 <div class="input-field col s8">
@@ -50,35 +50,24 @@
                                     <label for="target_time">Target time</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <button class="btn waves-effect waves-light" onclick="toggle()">
-                            <i class="material-icons">skip_next</i>
-                            </button>
-                        </div>
-
-                        <div id="user-details" class="user-details">
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input id="race_result_distance" name="race_result_distance" type="text" class="validate">
-                                    <label for="race_result_distance">Former result distance</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="race_result_time" name="race_result_time" type="text" class="validate">
-                                    <label for="race_result_time">Former result time</label>
-                                </div>
+                                <button type="button" class="btn waves-effect waves-light" onclick="toggle()">
+                                <i class="material-icons">fast_forward</i>
+                                </button>
                             </div>
-
+                        </div>
+                        <div id="user-details">
+                            <h3>User details</h3>
                             <div class="row">
-                                <div class="input-field col s3">
+                                <div class="input-field col s4">
                                     <input id="age" name="age" type="text" class="validate">
                                     <label for="age">Age</label>
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s4">
                                     <input id="weight" name="weight" type="text" class="validate">
                                     <label for="age">Weight</label>
                                 </div>
-                                <div class="input-field col s3">
+                                <div class="input-field col s4">
                                     <select id="shape_level" name="shape_level" class="validate">
                                         <option value="" disabled selected>Shape level</option>
                                         <option value="1">Bad shape</option>
@@ -90,6 +79,23 @@
                                         <option value="7">Lifetime athlete</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <h5>Recent races</h5>
+                                <div class="input-field col s6">
+                                    <select class="validate">
+                                        <option value="" disabled selected>race distance</option>
+                                        <option value="marathon">Marathon (42.2 KM)</option>
+                                        <option value="half_marathon">Half Marathon (21.1 KM)</option>
+                                        <option value="km_10">10 KM</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input class="timepicker" type="time">
+                                    <label for="target_time">Target time</label>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="input-field col s3">
                                     <select id="weekly_training_days" name="weekly_training_days" class="validate">
                                         <option disabled selected>Weekly days</option>
@@ -101,18 +107,20 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <button type="button" class="btn waves-effect waves-light" onclick="toggle()">
+                                <i class="material-icons">fast_rewind</i>
+                                </button>
+                            </div>
                         </div>
+                        <div class="row" id="submitBtn">
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                    <i class="material-icons right">play_arrow</i>
+                                </button>
 
-                        <!--<div class="row">-->
-                            <!--<div class="card-action">-->
-                                <!--<button class="btn waves-effect waves-light" type="submit" name="action">Submit-->
-                                    <!--<i class="material-icons right">thumb_up</i>-->
-                                <!--</button>-->
-                                <!--<button class="btn waves-effect waves-light" type="button" name="action">cancel-->
-                                    <!--<i class="material-icons right">thumb_down</i>-->
-                                <!--</button>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
