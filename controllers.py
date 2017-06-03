@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint
 from flask import render_template
 from flask import request
@@ -24,7 +26,15 @@ def test_application():
 
 @controllers.route('/create-plan', methods=['POST', 'GET'])
 def create_plan():
-    user_details = UserDetails(request.form)
+    form_details = request.get_json()
+    print(form_details)
+    user_details = UserDetails(form_details)
     p = Plan(user_details)
+    # mock = UserDetailsMock()
+    # p = Plan(mock)
     p.create()
-    return render_template('results.html', results=p.weekly_plan_list)
+    plan = p.serialize()
+    print(plan)
+    return json.dumps(plan)
+    # results = p.serialize()
+    # return render_template('new-results.html', results=results)

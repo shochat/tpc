@@ -4,20 +4,23 @@ from model.plan import RaceDistance
 
 class UserDetails:
     def __init__(self, form):
-        self.race_date = datetime.datetime.strptime(form['race_date'], '%d %B, %Y').date()
-        if form['race_distance'] == 'marathon':
+        self.race_date = datetime.datetime.strptime(form['raceDetails']['raceDate'], '%d-%m-%Y').date()
+        if form['raceDetails']['raceDistance'] == 'MARATHON':
             self.race_distance = RaceDistance.MARATHON
-        elif form['race_distance'] == 'half_marathon':
+        elif form['raceDetails']['raceDistance'] == 'HALF_MARATHON':
             self.race_distance = RaceDistance.HALF_MARATHON
         else:
             self.race_distance = RaceDistance.KM_10
-        self.target_time = datetime.datetime.strptime(form['target_time'], '%H:%M').time()
+        time = form['raceDetails']['targetTime'].split(':')
+        self.target_time = datetime.time(hour=int(time[0]), minute=int(time[1]), second=int(time[2]))
+        # self.target_time = datetime.time(hour=form['raceDetails']['targetTime']['hour'], minute=form['raceDetails']['targetTime']['minute'])
+        # self.target_time = datetime.datetime.strptime(form['raceDetails']['targetTime'], '%H:%M').time()
         self.target_pace = self.calculate_target_pace()
         # TODO former races
         self.age = int(form['age'])
         self.weight = int(form['weight'])
-        self.shape_level = int(form['shape_level'])
-        self.weekly_training_days = int(form['weekly_training_days'])
+        self.shape_level = int(form['shapeLevel'])
+        self.weekly_training_days = int(form['weeklyWorkoutDays'])
 
     def calculate_target_pace(self):
         total_time_in_minutes = self.target_time.hour * 60 + self.target_time.minute

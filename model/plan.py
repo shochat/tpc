@@ -81,16 +81,16 @@ class Plan:
             self.weekly_plan_list[i].is_recovery_week = True
 
     def set_weekly_workout_intensity(self):
-        tapper_weeks = list(filter((lambda x: x.weeks_from_race < 3), self.weekly_plan_list))
+        tapper_weeks = list(filter((lambda x: x.weeksFromRace < 3), self.weekly_plan_list))
         for week in tapper_weeks:
             week.intensity_level = WeeklyIntensity.TAPPER
-        stress_weeks = list(filter((lambda x: 3 <= x.weeks_from_race < 12), self.weekly_plan_list))
+        stress_weeks = list(filter((lambda x: 3 <= x.weeksFromRace < 12), self.weekly_plan_list))
         for week in stress_weeks:
             week.intensity_level = WeeklyIntensity.STRESS
-        build_weeks = list(filter((lambda x: 12 <= x.weeks_from_race < 17), self.weekly_plan_list))
+        build_weeks = list(filter((lambda x: 12 <= x.weeksFromRace < 17), self.weekly_plan_list))
         for week in build_weeks:
             week.intensity_level = WeeklyIntensity.BUILD
-        base_weeks = list(filter((lambda x: x.weeks_from_race >= 17), self.weekly_plan_list))
+        base_weeks = list(filter((lambda x: x.weeksFromRace >= 17), self.weekly_plan_list))
         for week in base_weeks:
             week.intensity_level = WeeklyIntensity.BASE
 
@@ -144,8 +144,9 @@ class Plan:
 
     def serialize(self):
         return {
-            'race_date': str(self.race_date),
-            'race_distance': str(self.race_distance.name),
-            'target_time': str(self.target_time),
-            'weekly_plan_list': list(map(lambda wp: wp.serialize(), self.weekly_plan_list))
+            # 'raceDate': str(self.race_date),
+            # 'raceDistance': str(self.race_distance.name),
+            # 'targetTime': str(self.target_time),
+            "weeklyPlanList": list(map(lambda wp: wp.serialize(), self.weekly_plan_list)),
+            # 'weeks': self.full_weeks_till_race
         }

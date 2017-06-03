@@ -27,22 +27,22 @@ class WorkoutIntensity(Enum):
 class Workout:
     def __init__(self, description, workout_type, intensity, day_in_week, duration, length):
         self.description = description
-        self.workout_type = workout_type
+        self.type = workout_type
         self.intensity = intensity
-        self.day_in_week = day_in_week
+        self.day = day_in_week
         self.duration = duration
         self.length = length
 
     def __str__(self):
         return 'Type: {}\nDescription: {}\nIntensity: {}\nDay: {}\nLength: {}\nDuration: {}'\
-            .format(self.workout_type, self.description, self.intensity, self.day_in_week, self.length, self.duration)
+            .format(self.type, self.description, self.intensity, self.day, self.length, self.duration)
 
     def __repr__(self):
         return json.dumps({
             'description': self.description,
-            'type': self.workout_type.name,
+            'type': self.type.name,
             'intensity': self.intensity.name,
-            'weekday': self.day_in_week.name,
+            'weekday': self.day.name,
             'length': self.length,
             'duration': self.duration
         })
@@ -50,9 +50,9 @@ class Workout:
     def serialize(self):
         return {
             'description': self.description,
-            'type': self.workout_type.name,
+            'type': self.type.name,
             'intensity': self.intensity.name,
-            'weekday': self.day_in_week.name,
+            'weekday': self.day.name,
             'length': self.length,
             'duration': self.duration
         }
