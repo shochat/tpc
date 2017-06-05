@@ -144,9 +144,12 @@ class Plan:
 
     def serialize(self):
         return {
+            'data': list(map(lambda wp: wp.serialize(), self.weekly_plan_list))
+        }
+        #return {
             # 'raceDate': str(self.race_date),
             # 'raceDistance': str(self.race_distance.name),
             # 'targetTime': str(self.target_time),
-            "weeklyPlanList": list(map(lambda wp: wp.serialize(), self.weekly_plan_list)),
+            #"weeklyPlanList": list(map(lambda wp: wp.serialize(), self.weekly_plan_list)),
             # 'weeks': self.full_weeks_till_race
-        }
+       #}

@@ -1,10 +1,10 @@
 import json
 
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flask import render_template
 from flask import request
 from model.plan import Plan
-from model.user_details import UserDetails
+from model.user_details import UserDetails, UserDetailsMock
 
 controllers = Blueprint('controllers', __name__, template_folder='templates')
 
@@ -27,14 +27,14 @@ def test_application():
 @controllers.route('/create-plan', methods=['POST', 'GET'])
 def create_plan():
     form_details = request.get_json()
-    print(form_details)
+    # print(form_details)
     user_details = UserDetails(form_details)
     p = Plan(user_details)
     # mock = UserDetailsMock()
     # p = Plan(mock)
     p.create()
-    plan = p.serialize()
-    print(plan)
-    return json.dumps(plan)
+    # plan = p.serialize()
+    # print(plan)
+    return jsonify(p.serialize())
     # results = p.serialize()
     # return render_template('new-results.html', results=results)
